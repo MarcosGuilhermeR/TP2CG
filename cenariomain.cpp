@@ -12,27 +12,18 @@
 
 #define CEU 0
 #define GRAMA 1
-<<<<<<< HEAD
 #define AREIA 2
 #define GUARDASOL 3
 #define PLACA 4
 #define PAQUITO1 5
 #define PAQUITO2 6
-=======
->>>>>>> origin/master
 
 
 float angulo = 0.0f, rota_paquito = 0.0, controle = 1.0, controle2 = 1.0;
 float xcamera = 0.0f, ycamera = 5.0f, zcamera = 30.0f;     //posicao da camera
 float dxcamera = 0.0f, dycamera = 0.0f, dzcamera = -1.0f;  //direção ao deslocar a camera
 
-<<<<<<< HEAD
-float angulo = 0.0f, rota_paquito = 0, controle = 1, controle2 = 1;
-float xcamera = 0.0f, ycamera = 5.0f, zcamera = 30.0f;     //posicao da camera
-float dxcamera = 0.0f, dycamera = 0.0f, dzcamera = -1.0f;  //direção ao deslocar a camera
 
-=======
->>>>>>> origin/master
 float quant = 0.4f, cmenu = 0;  //quant é o valor das coordenas rgb da luz difusa da camera
 
 GLuint texturas[MAX_TEX]; //vetor de texturas
@@ -243,15 +234,11 @@ void Inicializa() {
 
 	texturas[CEU] = SOIL_load_OGL_texture("textura/ceu.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 	texturas[GRAMA] = SOIL_load_OGL_texture("textura/grama.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
-<<<<<<< HEAD
 	texturas[AREIA] = SOIL_load_OGL_texture("textura/areia.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 	texturas[GUARDASOL] = SOIL_load_OGL_texture("textura/guardasol.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 	texturas[PLACA] = SOIL_load_OGL_texture("textura/placa.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 	texturas[PAQUITO1] = SOIL_load_OGL_texture("textura/paquito1.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 	texturas[PAQUITO2] = SOIL_load_OGL_texture("textura/pa_moinho.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
-
-=======
->>>>>>> origin/master
 
 }
 
@@ -259,13 +246,12 @@ void Inicializa() {
 void cenarioEsfera() {
 	glBindTexture(GL_TEXTURE_2D, texturas[CEU]);       //esfera modelada atraves de quadrica
 	glPushMatrix();
-<<<<<<< HEAD
-		GLUquadricObj *quad3;
-		quad3 = gluNewQuadric();
-		gluQuadricNormals(quad3, GLU_SMOOTH);
-		gluQuadricTexture(quad3, GL_TRUE);
-		glTranslatef(0.0f, 1.0f, 0.0f);
-		gluSphere(quad3, 200, 20.0, 20.0);
+	GLUquadricObj *quad3;
+	quad3 = gluNewQuadric();
+	gluQuadricNormals(quad3, GLU_SMOOTH);
+	gluQuadricTexture(quad3, GL_TRUE);
+	glTranslatef(0.0f, 1.0f, 0.0f);
+	gluSphere(quad3, 900.0, 20, 20);
 	glPopMatrix();
 }
 
@@ -275,7 +261,7 @@ void paquito() {
 	glPushMatrix();
 		glRotatef(rota_paquito, 0.0, 0.0, 1.0);
 		glTranslatef(5, 5.0f, 1.0f);
-		rota_paquito += 0.05;
+		rota_paquito += (float) 0.05;
 		if (rota_paquito > 360) rota_paquito = 0;
 		glBindTexture(GL_TEXTURE_2D, texturas[PAQUITO2]);          /*planos que contem as duas fotos de paquito*/
 		glBegin(GL_QUADS);
@@ -285,15 +271,14 @@ void paquito() {
 		glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 4.0f, 0.0f);
 		glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 2.0f, 0.0f);
 		glEnd();
-		
-=======
+
 	GLUquadricObj *quad3;
 	quad3 = gluNewQuadric();
 	gluQuadricNormals(quad3, GLU_SMOOTH);
 	gluQuadricTexture(quad3, GL_TRUE);
 	glTranslatef(0.0f, 1.0f, 0.0f);
 	gluSphere(quad3, 900.0, 20, 20);
->>>>>>> origin/master
+
 	glPopMatrix();
 }
 
@@ -322,13 +307,13 @@ void Desenha() {
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
 	cenarioEsfera();
-<<<<<<< HEAD
+
 	moinho();
-	paquito();
+	//paquito();
 	espec_grama[2] = 1.0;
-=======
+
 	espec_grama[2] = (float) 1.0;
->>>>>>> origin/master
+
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
 	espec_grama[0] = (float) 0.0;
@@ -382,7 +367,7 @@ int main(int argc, char **argv) {
 
 	glutDisplayFunc(Desenha);
 	glutIdleFunc(Desenha);
-	//glutFullScreen();
+	glutFullScreen();
 	glutReshapeFunc(AlteraTamanho);
 
 	glutMainLoop();

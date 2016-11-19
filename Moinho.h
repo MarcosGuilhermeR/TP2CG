@@ -9,7 +9,7 @@ void moinho() {
 	glBindTexture(GL_TEXTURE_2D, texturas[AREIA]);
 	gluQuadricNormals(quad, GLU_SMOOTH);
 	gluQuadricTexture(quad, GL_TRUE);
-	gluCylinder(quad, 1.2, 0.9, 15.0, 10.0, 10.0);
+	gluCylinder(quad, 1.2, 0.9, 15.0, 10, 10);
 	glPopMatrix();
 
 
@@ -34,7 +34,7 @@ void moinho() {
 	glBindTexture(GL_TEXTURE_2D, texturas[PLACA]);
 	gluQuadricNormals(quad3, GLU_SMOOTH);
 	gluQuadricTexture(quad3, GL_TRUE);
-	gluCylinder(quad, 1.2, 0.9, 15.0, 10.0, 10.0);
+	gluCylinder(quad, 1.2, 0.9, 15.0, 10, 10);
 	glPopMatrix();
 
 
