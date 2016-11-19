@@ -14,11 +14,11 @@
 #define GRAMA 1
 
 
-double angulo = 0.0f, rota_paquito = 0, controle = 1, controle2 = 1;
-double xcamera = 0.0f, ycamera = 5.0f, zcamera = 30.0f;     //posicao da camera
-double dxcamera = 0.0f, dycamera = 0.0f, dzcamera = -1.0f;  //direção ao deslocar a camera
+GLfloat angulo = 0.0f, rota_paquito = 0, controle = 1, controle2 = 1;
+GLfloat xcamera = 0.0f, ycamera = 5.0f, zcamera = 30.0f;     //posicao da camera
+GLfloat dxcamera = 0.0f, dycamera = 0.0f, dzcamera = -1.0f;  //direção ao deslocar a camera
 
-double quant = 0.4f, cmenu = 0;  //quant é o valor das coordenas rgb da luz difusa da camera
+GLfloat quant = 0.4f, cmenu = 0;  //quant é o valor das coordenas rgb da luz difusa da camera
 
 GLuint texturas[MAX_TEX]; //vetor de texturas
 
@@ -167,7 +167,7 @@ void TeclasEspeciais(int key, int x, int y) {
 //função que configura o redimensionamento de janela
 void AlteraTamanho(int largura, int altura) {
 	if (altura == 0) altura = 1;
-	int taxa = 1.0f * largura / altura;
+	float taxa = 1.0f * largura / altura;
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glViewport(0, 0, largura, altura);
@@ -239,7 +239,7 @@ void cenarioEsfera() {
 	gluQuadricNormals(quad3, GLU_SMOOTH);
 	gluQuadricTexture(quad3, GL_TRUE);
 	glTranslatef(0.0f, 1.0f, 0.0f);
-	gluSphere(quad3, 900, 20.0, 20.0);
+	gluSphere(quad3, 900.0, 20, 20);
 	glPopMatrix();
 }
 
