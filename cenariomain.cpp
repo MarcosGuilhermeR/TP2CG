@@ -14,6 +14,9 @@
 #define GRAMA 1
 #define AREIA 2
 #define GUARDASOL 3
+#define PLACA 4
+#define PAQUITO1 5
+#define PAQUITO2 6
 
 
 
@@ -232,6 +235,9 @@ void Inicializa() {
 	texturas[GRAMA] = SOIL_load_OGL_texture("textura/grama.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 	texturas[AREIA] = SOIL_load_OGL_texture("textura/areia.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 	texturas[GUARDASOL] = SOIL_load_OGL_texture("textura/guardasol.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+	texturas[PLACA] = SOIL_load_OGL_texture("textura/placa.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+	texturas[PAQUITO1] = SOIL_load_OGL_texture("textura/paquito1.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+	texturas[PAQUITO2] = SOIL_load_OGL_texture("textura/paquito2.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 
 
 }
@@ -249,31 +255,49 @@ void cenarioEsfera() {
 	glPopMatrix();
 }
 
+
+void paquito() {
+
+	glPushMatrix();
+		glRotatef(rota_paquito, 0.0, 0.0, 1.0);
+		rota_paquito += 0.05;
+		if (rota_paquito > 360) rota_paquito = 0;
+		glBindTexture(GL_TEXTURE_2D, texturas[PAQUITO1]);          /*planos que contem as duas fotos de paquito*/
+		glBegin(GL_QUADS);
+		glNormal3f(0, 1, 0);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 2.0f, 0.0f);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 4.0f, 0.0f);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 4.0f, 0.0f);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 2.0f, 0.0f);
+		glEnd();
+	
+	glPopMatrix();
+}
 void moinho() {
 
 	//Cilindro do moinho
 	glPushMatrix();
-	glRotatef(90, 0.0, 1.0, 0.0);
-	glRotatef(-90, 1.0, 0.0, 0.0);
-	GLUquadricObj *quad;
-	quad = gluNewQuadric();
-	glBindTexture(GL_TEXTURE_2D, texturas[AREIA]);
-	gluQuadricNormals(quad, GLU_SMOOTH);
-	gluQuadricTexture(quad, GL_TRUE);
-	gluCylinder(quad, 1.2, 0.9, 15.0, 10.0, 10.0);
+		glRotatef(90, 0.0, 1.0, 0.0);
+		glRotatef(-90, 1.0, 0.0, 0.0);
+		GLUquadricObj *quad;
+		quad = gluNewQuadric();
+		glBindTexture(GL_TEXTURE_2D, texturas[AREIA]);
+		gluQuadricNormals(quad, GLU_SMOOTH);
+		gluQuadricTexture(quad, GL_TRUE);
+		gluCylinder(quad, 1.2, 0.9, 15.0, 10.0, 10.0);
 	glPopMatrix();
 
 
 	//Cone do moinho
 	glPushMatrix();
-	glTranslatef(0, 15.0f, 0.0f);
-	glRotatef(-90, 1.0, 0.0, 0.0);
-	GLUquadricObj *quad3;
-	quad3 = gluNewQuadric();
-	glBindTexture(GL_TEXTURE_2D, texturas[GUARDASOL]);
-	gluQuadricNormals(quad3, GLU_SMOOTH);
-	gluQuadricTexture(quad3, GL_TRUE);
-	glutSolidCone(1.5, 1, 15, 15);
+		glTranslatef(0, 15.0f, 0.0f);
+		glRotatef(-90, 1.0, 0.0, 0.0);
+		GLUquadricObj *quad3;
+		quad3 = gluNewQuadric();
+		glBindTexture(GL_TEXTURE_2D, texturas[GUARDASOL]);
+		gluQuadricNormals(quad3, GLU_SMOOTH);
+		gluQuadricTexture(quad3, GL_TRUE);
+		glutSolidCone(1.5, 1, 15, 15);
 	glPopMatrix();
 
 
@@ -306,6 +330,7 @@ void Desenha() {
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
 	cenarioEsfera();
 	moinho();
+	paquito();
 	espec_grama[2] = 1.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
