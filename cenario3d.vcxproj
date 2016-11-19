@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\Dropbox\Cefet-Engenharia\8o Período\CG\Parte 2\Cenário 3d;D:\Dropbox\Cefet-Engenharia\8o Período\CG\Parte 2\Cenário 3d\freeglut\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Dropbox\Cefet-Engenharia\8o Período\CG\Parte 2\Cenário 3d\freeglut\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Maisa\Dropbox\8º Periodo\Computação Gráfica\Andre Cruz\grupo_2\TP2CG;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Maisa\Dropbox\8º Periodo\Computação Gráfica\Andre Cruz\grupo_2\TP2CG\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -97,7 +97,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Dropbox\Cefet-Engenharia\8o Período\CG\Parte 2\Cenário 3d\freeglut\include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Maisa\Dropbox\8º Periodo\Computação Gráfica\Andre Cruz\grupo_2\TP2CG\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

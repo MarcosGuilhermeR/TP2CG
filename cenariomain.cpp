@@ -1,7 +1,7 @@
 
 
-#include <GL/glut.h>
-#include <soil/SOIL.h>
+#include "GL/glut.h"
+#include "soil/SOIL.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,7 +10,7 @@
 
 #define MAX_TEX 23    //numero de texturas que serao usadas no vetor de texturas
 
-#define AREIA 0       //posiÃ§Ãµes do vetor de texturas que armazenam determinadas texturas
+#define AREIA 0       //posições do vetor de texturas que armazenam determinadas texturas
 #define TRAVE 1
 #define REDE 2
 #define LINHA 3
@@ -38,36 +38,36 @@ char MUSICA[] = "c.mp3";         //armazena o nome da musica durante o programa
 
 float angulo = 0.0f, rota_paquito = 0, controle = 1, controle2 = 1;
 float xcamera = 0.0f, ycamera = 5.0f, zcamera = 30.0f;     //posicao da camer
-float dxcamera = 0.0f, dycamera = 0.0f, dzcamera = -1.0f;  //direÃ§Ã£o ao deslocar a camera
+float dxcamera = 0.0f, dycamera = 0.0f, dzcamera = -1.0f;  //direção ao deslocar a camera
 
 int mostramenu = MENU1, antemusica = 0, amusica = 0;     //variaveis para o menu
 
-float quant = 0.4f, cmenu = 0;  //quant Ã© o valor das coordenas rgb da luz difusa da camera
+float quant = 0.4f, cmenu = 0;  //quant é o valor das coordenas rgb da luz difusa da camera
 
 GLuint texturas[MAX_TEX]; //vetor de texturas
 
-						  //funÃ§Ã£o que configura o menu
-void menu() {
-	glBindTexture(GL_TEXTURE_2D, texturas[mostramenu]);//passa tipoda textura(GL_TEXTURE_2D) e a texturas[mostramenu]->fala qual textura sera usada na prox renderizaÃ§Ã£o do plano
-	glPushMatrix();//tira sistema de coordenadas do topo da pilha
-	glTranslatef(xcamera + 17.0, ycamera - 5, zcamera - 24.7);
-	glRotatef(-0.6 * 57, 0.0, 1.0, 0.0);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-10.0f, -5.0f, 0.0f);//casa textura
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(10.0f, -5.0f, 0.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(10.0f, 15.0f, 0.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-10.0f, 15.0f, 0.0f);
-	glEnd();
-	glPopMatrix();
-}
+						  //função que configura o menu
+						  /*void menu(){
+						  glBindTexture(GL_TEXTURE_2D, texturas[mostramenu]);//passa tipoda textura(GL_TEXTURE_2D) e a texturas[mostramenu]->fala qual textura sera usada na prox renderização do plano
+						  glPushMatrix();//tira sistema de coordenadas do topo da pilha
+						  glTranslatef(xcamera + 17.0, ycamera - 5, zcamera - 24.7);
+						  glRotatef(-0.6*57, 0.0, 1.0, 0.0);
+						  glBegin(GL_QUADS);
+						  glNormal3f(0, 1, 0);
+						  glTexCoord2f(0.0f, 0.0f); glVertex3f(-10.0f, -5.0f, 0.0f);//casa textura
+						  glTexCoord2f(1.0f, 0.0f); glVertex3f(10.0f, -5.0f, 0.0f);
+						  glTexCoord2f(1.0f, 1.0f); glVertex3f(10.0f, 15.0f, 0.0f);
+						  glTexCoord2f(0.0f, 1.0f); glVertex3f(-10.0f, 15.0f, 0.0f);
+						  glEnd();
+						  glPopMatrix();
+						  }*/
 
-//funÃ§Ã£o que configura a musica a ser tocada
-void toca() {
-	//musica removida
-}
+						  //função que configura a musica a ser tocada
+						  /*void toca(){
+						  //musica removida
+						  }*/
 
-//funÃ§Ã£o que configura a direÃ§Ã£o da camera
+						  //função que configura a direção da camera
 void OrientaCamera(float ang) {
 	dxcamera = sin(ang);
 	dzcamera = -cos(ang);
@@ -75,7 +75,7 @@ void OrientaCamera(float ang) {
 	gluLookAt(xcamera, ycamera, zcamera, xcamera + dxcamera, ycamera + dycamera, zcamera + dzcamera, 0.0f, 1.0f, 0.0f);
 }
 
-//funÃ§Ã£o que configura a posiÃ§Ã£o da camera
+//função que configura a posição da camera
 void MoveCamera(int direcao) {
 	if (xcamera>90.0f) {
 		if (direcao*(dxcamera)*0.7 < 0)
@@ -117,7 +117,7 @@ void MoveCamera(int direcao) {
 			strcpy(MUSICA, "a.mp3");
 		else
 			strcpy(MUSICA, "b.mp3");
-		toca();
+		//toca();
 	}
 	glLoadIdentity();
 	gluLookAt(xcamera, ycamera, zcamera, xcamera + dxcamera, ycamera + dycamera, zcamera + dzcamera, 0.0f, 1.0f, 0.0f);
@@ -125,7 +125,7 @@ void MoveCamera(int direcao) {
 	glLightfv(GL_LIGHT1, GL_POSITION, posicaocamera);
 }
 
-//funÃ§Ã£o que trata eventos do teclado normal
+//função que trata eventos do teclado normal
 void TeclasNormais(unsigned char key, int x, int y) {
 
 	key = tolower(key);
@@ -256,7 +256,7 @@ void TeclasNormais(unsigned char key, int x, int y) {
 	}
 }
 
-//funÃ§Ã£o que trata os eventos de teclas especiais
+//função que trata os eventos de teclas especiais
 void TeclasEspeciais(int key, int x, int y) {
 	if (cmenu != 0) {
 		switch (key) {
@@ -293,7 +293,7 @@ void TeclasEspeciais(int key, int x, int y) {
 	 }*/
 }
 
-//funÃ§Ã£o que configura o redimensionamento de janela
+//função que configura o redimensionamento de janela
 void AlteraTamanho(int largura, int altura) {
 	if (altura == 0) altura = 1;
 	int taxa = 1.0f * largura / altura;
@@ -320,9 +320,9 @@ void AlteraTamanho(int largura, int altura) {
 	}
 }
 
-//funÃ§Ã£o que inicializa o programa, nela sÃ£o configuradas as luzes do programa e as texturas que serÃ£o utilizadas
+//função que inicializa o programa, nela são configuradas as luzes do programa e as texturas que serão utilizadas
 void Inicializa() {
-	toca();
+	//toca();
 
 	GLfloat luzAmbiente[4] = { 1.0, 1.0, 1.0, 1.0 };                         //vetores que armazenam dados a serem utilizados na configuracao de luzes
 	GLfloat luzEmissiva[4] = { 1.0, 1.0, 1.0, 1.0 };
@@ -344,15 +344,15 @@ void Inicializa() {
 	glLightfv(GL_LIGHT3, GL_EMISSION, luzEmissiva);
 	glLightfv(GL_LIGHT3, GL_POSITION, luzemissivaposicao);
 
-	glEnable(GL_COLOR_MATERIAL);                                           //habilita o uso de configuraÃ§Ã£o de materiais
-	glEnable(GL_LIGHTING);                      						   //habilita iluminaÃ§Ã£o
+	glEnable(GL_COLOR_MATERIAL);                                           //habilita o uso de configuração de materiais
+	glEnable(GL_LIGHTING);                      						   //habilita iluminação
 	glEnable(GL_LIGHT0);												   //habilita as diversas luzes
 	glEnable(GL_LIGHT1);
 	glEnable(GL_LIGHT2);
 	glEnable(GL_LIGHT3);
 	glEnable(GL_DEPTH_TEST);                                               //habilita teste de profundidade
 
-	glEnable(GL_TEXTURE_2D);                                            //habilita texturas 2d e elas sÃ£o configuradas
+	glEnable(GL_TEXTURE_2D);                                            //habilita texturas 2d e elas são configuradas
 	glGenTextures(1, texturas);
 
 	texturas[AREIA] = SOIL_load_OGL_texture("textura/areia.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
@@ -381,295 +381,295 @@ void Inicializa() {
 
 }
 
-//funÃ§Ã£o que desenha o gol, modelado atraves de quadricas e planos
-void gol() {
-	glPushMatrix();                                                //cilindros que sÃ£o as traves do gol
-	glRotatef(90, 0.0, 1.0, 0.0);
-	glRotatef(-90, 1.0, 0.0, 0.0);
-	GLUquadricObj *quad;
-	quad = gluNewQuadric();
-	glBindTexture(GL_TEXTURE_2D, texturas[TRAVE]);
-	gluQuadricNormals(quad, GLU_SMOOTH);
-	gluQuadricTexture(quad, GL_TRUE);
-	gluCylinder(quad, 0.5, 0.5, 15.0, 10.0, 10.0);
-	glPopMatrix();
+//função que desenha o gol, modelado atraves de quadricas e planos
+/*void gol(){
+glPushMatrix();                                                //cilindros que são as traves do gol
+glRotatef(90, 0.0, 1.0, 0.0);
+glRotatef(-90, 1.0, 0.0, 0.0);
+GLUquadricObj *quad;
+quad = gluNewQuadric();
+glBindTexture(GL_TEXTURE_2D, texturas[TRAVE]);
+gluQuadricNormals(quad, GLU_SMOOTH);
+gluQuadricTexture(quad, GL_TRUE);
+gluCylinder( quad, 0.5, 0.5, 15.0, 10.0, 10.0);
+glPopMatrix();
 
-	glPushMatrix();
-	glTranslatef(-20.0f, 0.0f, 0.0f);
-	glRotatef(90, 0.0, 1.0, 0.0);
-	glRotatef(-90, 1.0, 0.0, 0.0);
-	GLUquadricObj *quad2;
-	quad2 = gluNewQuadric();
-	glBindTexture(GL_TEXTURE_2D, texturas[TRAVE]);
-	gluQuadricNormals(quad2, GLU_SMOOTH);
-	gluQuadricTexture(quad2, GL_TRUE);
-	gluCylinder(quad2, 0.5, 0.5, 15.0, 10.0, 10.0);
+glPushMatrix();
+glTranslatef(-20.0f, 0.0f, 0.0f);
+glRotatef(90, 0.0, 1.0, 0.0);
+glRotatef(-90, 1.0, 0.0, 0.0);
+GLUquadricObj *quad2;
+quad2 = gluNewQuadric();
+glBindTexture(GL_TEXTURE_2D, texturas[TRAVE]);
+gluQuadricNormals(quad2, GLU_SMOOTH);
+gluQuadricTexture(quad2, GL_TRUE);
+gluCylinder( quad2, 0.5, 0.5, 15.0, 10.0, 10.0);
 
-	glPopMatrix();
+glPopMatrix();
 
-	glPushMatrix();
-	glTranslatef(-20.0f, 14.5f, 0.0f);
-	glRotatef(90, 0.0, 1.0, 0.0);
-	GLUquadricObj *quad3;
-	quad3 = gluNewQuadric();
-	glBindTexture(GL_TEXTURE_2D, texturas[TRAVE]);
-	gluQuadricNormals(quad3, GLU_SMOOTH);
-	gluQuadricTexture(quad3, GL_TRUE);
-	gluCylinder(quad3, 0.5, 0.5, 20.0, 10.0, 10.0);
-	glPopMatrix();
+glPushMatrix();
+glTranslatef(-20.0f, 14.5f, 0.0f);
+glRotatef(90, 0.0, 1.0, 0.0);
+GLUquadricObj *quad3;
+quad3 = gluNewQuadric();
+glBindTexture(GL_TEXTURE_2D, texturas[TRAVE]);
+gluQuadricNormals(quad3, GLU_SMOOTH);
+gluQuadricTexture(quad3, GL_TRUE);
+gluCylinder( quad3, 0.5, 0.5, 20.0, 10.0, 10.0);
+glPopMatrix();
 
-	glBindTexture(GL_TEXTURE_2D, texturas[REDE]);
-	//planos que modelam a rede do gol
-	glPushMatrix();
-	glTranslatef(-10.0f, 15.0f, -3.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(10.0f, 0.0f, -3.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(10.0f, 0.0f, 3.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(-10.0f, 0.0f, 3.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(-10.0f, 0.0f, -3.0f);
-	glEnd();
-	glPopMatrix();
+glBindTexture(GL_TEXTURE_2D, texturas[REDE]);
+//planos que modelam a rede do gol
+glPushMatrix();
+glTranslatef(-10.0f, 15.0f, -3.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(10.0f, 0.0f, -3.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(10.0f, 0.0f,  3.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(-10.0f, 0.0f,  3.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(-10.0f, 0.0f, -3.0f);
+glEnd();
+glPopMatrix();
 
-	glPushMatrix();
-	glTranslatef(0.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 0.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 15.0f, 0.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(0.0f, 15.0f, -6.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0f, 0.0f, -12.0f);
-	glEnd();
-	glPopMatrix();
+glPushMatrix();
+glTranslatef(0.0f, 0.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 0.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 15.0f,  0.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(0.0f, 15.0f,  -6.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0f, 0.0f, -12.0f);
+glEnd();
+glPopMatrix();
 
-	glPushMatrix();
-	glTranslatef(-20.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 0.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 15.0f, 0.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(0.0f, 15.0f, -6.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0f, 0.0f, -12.0f);
-	glEnd();
-	glPopMatrix();
+glPushMatrix();
+glTranslatef(-20.0f, 0.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 0.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 15.0f,  0.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(0.0f, 15.0f,  -6.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0f, 0.0f, -12.0f);
+glEnd();
+glPopMatrix();
 
-	glPushMatrix();
-	glTranslatef(0.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 0.0f, -12.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(-20.0f, 0.0f, -12.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(-20.0f, 15.0f, -6.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 15.0f, -6.0f);
-	glEnd();
-	glPopMatrix();
-}
+glPushMatrix();
+glTranslatef(0.0f, 0.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 0.0f, -12.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(-20.0f, 0.0f,  -12.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(-20.0f, 15.0f,  -6.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 15.0f, -6.0f);
+glEnd();
+glPopMatrix();
+}*/
 
-//funÃ§Ã£o que desenha as linhas que definem o campo de jogo
-void campo() {
-	glBindTexture(GL_TEXTURE_2D, texturas[LINHA]);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(40.0f, 0.1f, 59.5f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-40.0f, 0.1f, 59.5f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(-40.0f, 0.1f, 60.5f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(40.0f, 0.1f, 60.5f);
-	glEnd();
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(40.0f, 0.1f, -59.5f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-40.0f, 0.1f, -59.5f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(-40.0f, 0.1f, -60.5f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(40.0f, 0.1f, -60.5f);
-	glEnd();
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(39.0f, 0.1f, -60.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(40.0f, 0.1f, -60.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(40.0f, 0.1f, 60.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(39.0f, 0.1f, 60.0f);
-	glEnd();
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-39.0f, 0.1f, -60.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-40.0f, 0.1f, -60.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(-40.0f, 0.1f, 60.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(-39.0f, 0.1f, 60.0f);
-	glEnd();
-}
+//função que desenha as linhas que definem o campo de jogo
+/*void campo(){
+glBindTexture(GL_TEXTURE_2D, texturas[LINHA]);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(40.0f, 0.1f, 59.5f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(-40.0f, 0.1f, 59.5f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(-40.0f, 0.1f,60.5f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(40.0f, 0.1f, 60.5f);
+glEnd();
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(40.0f, 0.1f, -59.5f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(-40.0f, 0.1f, -59.5f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(-40.0f, 0.1f,-60.5f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(40.0f, 0.1f, -60.5f);
+glEnd();
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(39.0f, 0.1f, -60.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(40.0f, 0.1f, -60.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(40.0f, 0.1f,60.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(39.0f, 0.1f, 60.0f);
+glEnd();
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(-39.0f, 0.1f, -60.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(-40.0f, 0.1f, -60.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(-40.0f, 0.1f,60.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(-39.0f, 0.1f, 60.0f);
+glEnd();
+}*/
 
-//funÃ§Ã£o que desenha o cenario, ceu e mar
-void cenario() {
-	glBindTexture(GL_TEXTURE_2D, texturas[CEU]);             //planos que definem os "horizontes" da cena
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-400.0f, 0.0f, -400.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-400.0f, 1000.0f, -400.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(400.0f, 1000.0f, -400.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(400.0f, 0.0f, -400.0f);
-	glEnd();
-	glBindTexture(GL_TEXTURE_2D, texturas[CEU3]);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-400.0f, 0.0f, 400.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-400.0f, 1000.0f, 400.0f);
-	glTexCoord2f(0.5f, 1.0f); glVertex3f(400.0f, 1000.0f, 400.0f);
-	glTexCoord2f(0.5f, 0.0f); glVertex3f(400.0f, 0.0f, 400.0f);
-	glEnd();
-	glBindTexture(GL_TEXTURE_2D, texturas[CEU2]);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-400.0f, 0.0f, 400.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-400.0f, 1000.0f, 400.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(-400.0f, 1000.0f, -400.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(-400.0f, 0.0f, -400.0f);
-	glEnd();
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(400.0f, 0.0f, 400.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(400.0f, 1000.0f, 400.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(400.0f, 1000.0f, -400.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(400.0f, 0.0f, -400.0f);
-	glEnd();
-}
+//função que desenha o cenario, ceu e mar
+/*void cenario(){
+glBindTexture(GL_TEXTURE_2D, texturas[CEU]);             //planos que definem os "horizontes" da cena
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(-400.0f, 0.0f, -400.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(-400.0f, 1000.0f, -400.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(400.0f, 1000.0f,-400.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(400.0f, 0.0f, -400.0f);
+glEnd();
+glBindTexture(GL_TEXTURE_2D, texturas[CEU3]);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(-400.0f, 0.0f, 400.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(-400.0f, 1000.0f, 400.0f);
+glTexCoord2f(0.5f, 1.0f); glVertex3f(400.0f, 1000.0f,400.0f);
+glTexCoord2f(0.5f, 0.0f); glVertex3f(400.0f, 0.0f, 400.0f);
+glEnd();
+glBindTexture(GL_TEXTURE_2D, texturas[CEU2]);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(-400.0f, 0.0f, 400.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(-400.0f, 1000.0f, 400.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(-400.0f, 1000.0f,-400.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(-400.0f, 0.0f, -400.0f);
+glEnd();
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(400.0f, 0.0f, 400.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(400.0f, 1000.0f, 400.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(400.0f, 1000.0f,-400.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(400.0f, 0.0f, -400.0f);
+glEnd();
+}*/
 
-//funÃ§Ã£o que desenha a arquibancada, modelada atraves varios planos
-void arquibancada() {
-	glBindTexture(GL_TEXTURE_2D, texturas[ARQUIBANCADA]);         //varios planos que definem o formato da arquibancada
-	glPushMatrix();
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 4.0f, 10.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 4.0f, 10.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 4.0f, -10.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 4.0f, -10.0f);
-	glEnd();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(2.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 8.0f, 10.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 8.0f, 10.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 8.0f, -10.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 8.0f, -10.0f);
-	glEnd();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(4.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 12.0f, 10.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 12.0f, 10.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 12.0f, -10.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 12.0f, -10.0f);
-	glEnd();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(-1.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 10.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 4.0f, 10.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(0.0f, 4.0f, -10.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0f, 0.0f, -10.0f);
-	glEnd();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(1.0f, 4.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 10.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 4.0f, 10.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(0.0f, 4.0f, -10.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0f, 0.0f, -10.0f);
-	glEnd();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(3.0f, 8.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 10.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 4.0f, 10.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(0.0f, 4.0f, -10.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0f, 0.0f, -10.0f);
-	glEnd();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(5.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 10.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 12.0f, 10.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(0.0f, 12.0f, -10.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0f, 0.0f, -10.0f);
-	glEnd();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(0.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 0.0f, 10.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 4.0f, 10.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 4.0f, 10.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 0.0f, 10.0f);
-	glEnd();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(2.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 0.0f, 10.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 8.0f, 10.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 8.0f, 10.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 0.0f, 10.0f);
-	glEnd();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(4.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 0.0f, 10.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 12.0f, 10.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 12.0f, 10.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 0.0f, 10.0f);
-	glEnd();
-	glPopMatrix();
+//função que desenha a arquibancada, modelada atraves varios planos
+/*void arquibancada(){
+glBindTexture(GL_TEXTURE_2D, texturas[ARQUIBANCADA]);         //varios planos que definem o formato da arquibancada
+glPushMatrix();
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 4.0f, 10.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 4.0f, 10.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 4.0f,-10.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 4.0f, -10.0f);
+glEnd();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(2.0f, 0.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 8.0f, 10.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 8.0f, 10.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 8.0f,-10.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 8.0f, -10.0f);
+glEnd();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(4.0f, 0.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 12.0f, 10.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, 12.0f, 10.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 12.0f,-10.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 12.0f, -10.0f);
+glEnd();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(-1.0f, 0.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 10.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 4.0f, 10.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(0.0f, 4.0f,-10.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0f, 0.0f, -10.0f);
+glEnd();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(1.0f, 4.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 10.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 4.0f, 10.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(0.0f, 4.0f,-10.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0f, 0.0f, -10.0f);
+glEnd();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(3.0f, 8.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 10.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 4.0f, 10.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(0.0f, 4.0f,-10.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0f, 0.0f, -10.0f);
+glEnd();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(5.0f, 0.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 10.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(0.0f, 12.0f, 10.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(0.0f, 12.0f,-10.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0f, 0.0f, -10.0f);
+glEnd();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(0.0f, 0.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 0.0f, 10.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 4.0f, 10.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 4.0f, 10.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 0.0f, 10.0f);
+glEnd();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(2.0f, 0.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 0.0f, 10.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 8.0f, 10.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 8.0f, 10.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 0.0f, 10.0f);
+glEnd();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(4.0f, 0.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 0.0f, 10.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 12.0f, 10.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 12.0f, 10.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 0.0f, 10.0f);
+glEnd();
+glPopMatrix();
 
-	glPushMatrix();
-	glTranslatef(0.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 0.0f, -10.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 4.0f, -10.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 4.0f, -10.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 0.0f, -10.0f);
-	glEnd();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(2.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 0.0f, -10.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 8.0f, -10.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 8.0f, -10.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 0.0f, -10.0f);
-	glEnd();
-	glPopMatrix();
-	glPushMatrix();
-	glTranslatef(4.0f, 0.0f, 0.0f);
-	glBegin(GL_QUADS);
-	glNormal3f(0, 1, 0);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 0.0f, -10.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 12.0f, -10.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 12.0f, -10.0f);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 0.0f, -10.0f);
-	glEnd();
-	glPopMatrix();
-}
+glPushMatrix();
+glTranslatef(0.0f, 0.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 0.0f, -10.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 4.0f, -10.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 4.0f, -10.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 0.0f, -10.0f);
+glEnd();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(2.0f, 0.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 0.0f, -10.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 8.0f, -10.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 8.0f, -10.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 0.0f, -10.0f);
+glEnd();
+glPopMatrix();
+glPushMatrix();
+glTranslatef(4.0f, 0.0f, 0.0f);
+glBegin(GL_QUADS);
+glNormal3f(0, 1, 0);
+glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 0.0f, -10.0f);
+glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 12.0f, -10.0f);
+glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 12.0f, -10.0f);
+glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 0.0f, -10.0f);
+glEnd();
+glPopMatrix();
+}*/
 
-//funÃ§Ã£o que desenha a bola, modelada atraves de quadrica
-void jabulani() {
+//função que desenha a bola, modelada atraves de quadrica
+void cenarioEsfera() {
 	glBindTexture(GL_TEXTURE_2D, texturas[CEU]);       //esfera modelada atraves de quadrica
 	glPushMatrix();
 	GLUquadricObj *quad3;
@@ -681,7 +681,7 @@ void jabulani() {
 	glPopMatrix();
 }
 
-//funÃ§Ã£o que desenha as placas publicitarias, modeladas atraves de varios planos
+//função que desenha as placas publicitarias, modeladas atraves de varios planos
 /*void publicidade(){
 glBindTexture(GL_TEXTURE_2D, texturas[PUBLICIDADE]);              //varios planos seguidos que contem as faces externas e internas das placas de publicidade
 glPushMatrix();
@@ -765,9 +765,9 @@ glEnd();
 glPopMatrix();
 }*/
 
-//funÃ§Ã£o que desenha o placar, modelado atraves de quadricas e plano
+//função que desenha o placar, modelado atraves de quadricas e plano
 /*void placar(){
-glBindTexture(GL_TEXTURE_2D, texturas[PLACA]);     //2 cilindros que sÃ£o a base do placar
+glBindTexture(GL_TEXTURE_2D, texturas[PLACA]);     //2 cilindros que são a base do placar
 glPushMatrix();
 glRotatef(90, 0.0, 1.0, 0.0);
 glRotatef(-90, 1.0, 0.0, 0.0);
@@ -809,9 +809,9 @@ glEnd();
 glPopMatrix();
 }*/
 
-//funÃ§Ã£o que desenha o outdoor do paquito que fica girando, modelado atraves de quadricas e plano
+//função que desenha o outdoor do paquito que fica girando, modelado atraves de quadricas e plano
 /*void paquito(){
-glBindTexture(GL_TEXTURE_2D, texturas[PLACA]);     //cilindro que Ã© a base do outdoor
+glBindTexture(GL_TEXTURE_2D, texturas[PLACA]);     //cilindro que é a base do outdoor
 glPushMatrix();
 glRotatef(90, 0.0, 1.0, 0.0);
 glRotatef(-90, 1.0, 0.0, 0.0);
@@ -844,9 +844,9 @@ glEnd();
 glPopMatrix();
 }*/
 
-//funÃ§Ã£o que desenha o guarda sol, modelado atraves de quadricas e 6 triangulos
+//função que desenha o guarda sol, modelado atraves de quadricas e 6 triangulos
 /*void guardasol(){
-glBindTexture(GL_TEXTURE_2D, texturas[PLACA]);	    //cilindro que Ã© o eixo do guarda sol
+glBindTexture(GL_TEXTURE_2D, texturas[PLACA]);	    //cilindro que é o eixo do guarda sol
 glPushMatrix();
 glRotatef(90, 0.0, 1.0, 0.0);
 glRotatef(-90, 1.0, 0.0, 0.0);
@@ -895,7 +895,7 @@ glTexCoord2f(1.0f, 1.0f); glVertex3f(2.6f, 8.0f, -1.5f);
 glEnd();
 }*/
 
-//funÃ§Ã£o que desenha o toldo que cobre as cadeiras dos reservas, modelado atraves de quadricas e plano
+//função que desenha o toldo que cobre as cadeiras dos reservas, modelado atraves de quadricas e plano
 /*void toldo(){
 glPushMatrix();
 glScalef(1,1,3.7);                          //planos que formam o objeto 3d que o toldo
@@ -964,9 +964,9 @@ gluCylinder( quad2, 0.1, 0.1, 10.0, 10.0, 10.0);
 glPopMatrix();
 }*/
 
-//funÃ§Ã£o que desenha a cadeira, modelada atraves de quadricas e planos
+//função que desenha a cadeira, modelada atraves de quadricas e planos
 /*void cadeira(){
-glBindTexture(GL_TEXTURE_2D, texturas[CADEIRA]);    //sÃ£o desenhadas quatro cilindros que serao os pes da cadeira e tambem o "encosto"
+glBindTexture(GL_TEXTURE_2D, texturas[CADEIRA]);    //são desenhadas quatro cilindros que serao os pes da cadeira e tambem o "encosto"
 glPushMatrix();
 glRotatef(90, 0.0, 1.0, 0.0);
 glRotatef(-90, 1.0, 0.0, 0.0);
@@ -1006,7 +1006,7 @@ gluQuadricNormals(quad4, GLU_SMOOTH);
 gluQuadricTexture(quad4, GL_TRUE);
 gluCylinder( quad4, 0.05, 0.05, 2.0, 10.0, 10.0);
 glPopMatrix();
-glBegin(GL_QUADS);                                  //planos que sÃ£o o assento e o encosto da cadeira
+glBegin(GL_QUADS);                                  //planos que são o assento e o encosto da cadeira
 glNormal3f(0, 1, 0);
 glTexCoord2f(0.0f, 0.0f); glVertex3f(-0.1f, 2.0f, 0.1f);
 glTexCoord2f(0.0f, 1.0f); glVertex3f(-0.1f, 2.0f, -1.1f);
@@ -1022,7 +1022,7 @@ glTexCoord2f(1.0f, 0.0f); glVertex3f(0.0f, 4.0f, 0.1f);
 glEnd();
 }*/
 
-//funÃ§Ã£o que desenha a mesa, modelada atraves de quadricas e planos
+//função que desenha a mesa, modelada atraves de quadricas e planos
 /*void mesa(){
 glBindTexture(GL_TEXTURE_2D, texturas[GUARDASOL]);
 glPushMatrix();
@@ -1108,7 +1108,7 @@ glTexCoord2f(1.0f, 0.0f); glVertex3f(3.5f, 3.3f, -4.5f);
 glEnd();
 }*/
 
-//funÃ§Ã£o que configura os materiais dos objetos que serao chamados para serem desenhados
+//função que configura os materiais dos objetos que serao chamados para serem desenhados
 void Desenha() {
 
 	GLfloat espec_grama[4] = { 0.7, 0.7, 0.7, 1.0 };
@@ -1144,8 +1144,8 @@ void Desenha() {
 	//gol();
 	glPopMatrix();
 	//campo();
-	cenario();//TIRAR DEPOIS
-	jabulani();
+	//cenario();//TIRAR DEPOIS
+	cenarioEsfera();
 	espec_grama[2] = 1.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
@@ -1262,7 +1262,7 @@ void Desenha() {
 
 }
 
-//funÃ§Ã£o principal do programa
+//função principal do programa
 int main(int argc, char **argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
