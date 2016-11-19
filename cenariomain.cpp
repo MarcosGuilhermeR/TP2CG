@@ -113,10 +113,10 @@ void MoveCamera(int direcao) {
 			if (strcmp(MUSICA, "a.mp3") == 0)
 				controle2 = 1;
 		}
-		if (controle == 1)
-			strcpy(MUSICA, "a.mp3");
-		else
-			strcpy(MUSICA, "b.mp3");
+	//	if (controle == 1)
+//			strcpy(MUSICA, "a.mp3");
+		//else
+	//		strcpy(MUSICA, "b.mp3");
 		//toca();
 	}
 	glLoadIdentity();
