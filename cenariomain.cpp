@@ -14,18 +14,18 @@
 #define GRAMA 1
 
 
-GLfloat angulo = 0.0f, rota_paquito = 0, controle = 1, controle2 = 1;
-GLfloat xcamera = 0.0f, ycamera = 5.0f, zcamera = 30.0f;     //posicao da camera
-GLfloat dxcamera = 0.0f, dycamera = 0.0f, dzcamera = -1.0f;  //direção ao deslocar a camera
+float angulo = 0.0f, rota_paquito = 0.0, controle = 1.0, controle2 = 1.0;
+float xcamera = 0.0f, ycamera = 5.0f, zcamera = 30.0f;     //posicao da camera
+float dxcamera = 0.0f, dycamera = 0.0f, dzcamera = -1.0f;  //direção ao deslocar a camera
 
-GLfloat quant = 0.4f, cmenu = 0;  //quant é o valor das coordenas rgb da luz difusa da camera
+float quant = 0.4f, cmenu = 0;  //quant é o valor das coordenas rgb da luz difusa da camera
 
 GLuint texturas[MAX_TEX]; //vetor de texturas
 
 //função que configura a direção da camera
 void OrientaCamera(float ang) {
-	dxcamera = sin(ang);
-	dzcamera = -cos(ang);
+	dxcamera = (float) sin(ang);
+	dzcamera = (float) -cos(ang);
 	glLoadIdentity();
 	gluLookAt(xcamera, ycamera, zcamera, xcamera + dxcamera, ycamera + dycamera, zcamera + dzcamera, 0.0f, 1.0f, 0.0f);
 }
@@ -34,22 +34,22 @@ void OrientaCamera(float ang) {
 void MoveCamera(int direcao) {
 	if (xcamera>90.0f) {
 		if (direcao*(dxcamera)*0.7 < 0)
-			xcamera = xcamera + direcao*(dxcamera)*0.7;
+			xcamera =  xcamera + direcao*(dxcamera)*(float)0.7;
 	}
 	if (xcamera<-90.0f) {
 		if (direcao*(dxcamera)*0.7 > 0)
-			xcamera = xcamera + direcao*(dxcamera)*0.7;
+			xcamera = xcamera + direcao*(dxcamera)*(float)0.7;
 	}
 	if (xcamera>-90.0f && xcamera<90.0f)
-		xcamera = xcamera + direcao*(dxcamera)*0.7;
+		xcamera =  xcamera + direcao*(dxcamera)*(float)0.7;
 
 	if (zcamera>90.0f) {
 		if (direcao*(dzcamera)*0.7 < 0)
-			zcamera = zcamera + direcao*(dzcamera)*0.7;
+			zcamera =  zcamera + direcao*(dzcamera)*(float)0.7;
 	}
 	if (zcamera<-90.0f) {
 		if (direcao*(dzcamera)*0.7 > 0)
-			zcamera = zcamera + direcao*(dzcamera)*0.7;
+			zcamera =  zcamera + direcao*(dzcamera)*(float)0.7;
 	}
 	
 	glLoadIdentity();
@@ -246,7 +246,7 @@ void cenarioEsfera() {
 //função que configura os materiais dos objetos que serao chamados para serem desenhados
 void Desenha() {
 
-	GLfloat espec_grama[4] = { 0.7, 0.7, 0.7, 1.0 };
+	GLfloat espec_grama[4] = { (float) 0.7,(float) 0.7, (float)0.7, (float)1.0 };
 	GLint especMaterial = 100;
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -261,46 +261,46 @@ void Desenha() {
 	glTexCoord2f(80.0f, 80.0f); glVertex3f(400.0f, 0.0f, 400.0f);
 	glTexCoord2f(80.0f, 0.0f); glVertex3f(-400.0f, 0.0f, 400.0f);
 	glEnd();
-	espec_grama[0] = 1.0;
+	espec_grama[0] = (float) 1.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[1] = 1.0;
+	espec_grama[1] = (float) 1.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
 	cenarioEsfera();
-	espec_grama[2] = 1.0;
+	espec_grama[2] = (float) 1.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[0] = 0.0;
-	espec_grama[2] = 0.0;
+	espec_grama[0] = (float) 0.0;
+	espec_grama[2] = (float) 0.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[1] = 0.5;
+	espec_grama[1] = (float) 0.5;
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[0] = 1.0;
+	espec_grama[0] = (float) 1.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[0] = 0.5;
-	espec_grama[1] = 0.5;
-	espec_grama[2] = 0.5;
+	espec_grama[0] = (float) 0.5;
+	espec_grama[1] = (float) 0.5;
+	espec_grama[2] = (float) 0.5;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[0] = 0.0;
+	espec_grama[0] = (float) 0.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[2] = 1.0;
+	espec_grama[2] = (float) 1.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[1] = 0.3;
-	espec_grama[2] = 0.2;
+	espec_grama[1] = (float) 0.3;
+	espec_grama[2] = (float) 0.2;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[0] = 0.1;
+	espec_grama[0] = (float) 0.1;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
 	glBindTexture(GL_TEXTURE_2D, texturas[GRAMA]);
-	espec_grama[3] = 0.7;
+	espec_grama[3] =  (float) 0.7;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
