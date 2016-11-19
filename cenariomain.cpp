@@ -1278,7 +1278,7 @@ int main(int argc, char **argv) {
 	glutIdleFunc(Desenha);
 	glutFullScreen();
 	glutReshapeFunc(AlteraTamanho);
-	 
+
 	glutMainLoop();
 
 
