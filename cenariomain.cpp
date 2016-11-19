@@ -12,6 +12,9 @@
 
 #define CEU 0
 #define GRAMA 1
+#define AREIA 2
+#define GUARDASOL 3
+
 
 
 float angulo = 0.0f, rota_paquito = 0, controle = 1, controle2 = 1;
@@ -227,6 +230,9 @@ void Inicializa() {
 
 	texturas[CEU] = SOIL_load_OGL_texture("textura/ceu.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 	texturas[GRAMA] = SOIL_load_OGL_texture("textura/grama.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+	texturas[AREIA] = SOIL_load_OGL_texture("textura/areia.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+	texturas[GUARDASOL] = SOIL_load_OGL_texture("textura/guardasol.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+
 
 }
 
@@ -243,11 +249,42 @@ void cenarioEsfera() {
 	glPopMatrix();
 }
 
+void moinho() {
+
+	//Cilindro do moinho
+	glPushMatrix();
+	glRotatef(90, 0.0, 1.0, 0.0);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+	GLUquadricObj *quad;
+	quad = gluNewQuadric();
+	glBindTexture(GL_TEXTURE_2D, texturas[AREIA]);
+	gluQuadricNormals(quad, GLU_SMOOTH);
+	gluQuadricTexture(quad, GL_TRUE);
+	gluCylinder(quad, 1.2, 0.9, 15.0, 10.0, 10.0);
+	glPopMatrix();
+
+
+	//Cone do moinho
+	glPushMatrix();
+	glTranslatef(0, 15.0f, 0.0f);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+	GLUquadricObj *quad3;
+	quad3 = gluNewQuadric();
+	glBindTexture(GL_TEXTURE_2D, texturas[GUARDASOL]);
+	gluQuadricNormals(quad3, GLU_SMOOTH);
+	gluQuadricTexture(quad3, GL_TRUE);
+	glutSolidCone(1.5, 1, 15, 15);
+	glPopMatrix();
+
+
+}
+
 //função que configura os materiais dos objetos que serao chamados para serem desenhados
 void Desenha() {
 
 	GLfloat espec_grama[4] = { 0.7, 0.7, 0.7, 1.0 };
 	GLint especMaterial = 100;
+	
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -268,6 +305,7 @@ void Desenha() {
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
 	cenarioEsfera();
+	moinho();
 	espec_grama[2] = 1.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
@@ -306,6 +344,7 @@ void Desenha() {
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
 	glutSwapBuffers();
+	
 }
 
 //função principal do programa
