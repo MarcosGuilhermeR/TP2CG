@@ -11,7 +11,7 @@
 #define MAX_TEX 23    //numero de texturas que serao usadas no vetor de texturas
 
 #define CEU 0
-#define VERDE 1
+#define GRAMA 1
 
 
 float angulo = 0.0f, rota_paquito = 0, controle = 1, controle2 = 1;
@@ -226,7 +226,7 @@ void Inicializa() {
 	glGenTextures(1, texturas);
 
 	texturas[CEU] = SOIL_load_OGL_texture("textura/ceu.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
-	texturas[VERDE] = SOIL_load_OGL_texture("textura/verde.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+	texturas[GRAMA] = SOIL_load_OGL_texture("textura/grama.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 
 }
 
@@ -253,7 +253,7 @@ void Desenha() {
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	glBindTexture(GL_TEXTURE_2D, texturas[VERDE]);
+	glBindTexture(GL_TEXTURE_2D, texturas[GRAMA]);
 	glBegin(GL_QUADS);
 	glNormal3f(0, 1, 0);
 	glTexCoord2f(0.0f, 0.0f); glVertex3f(-400.0f, 0.0f, -400.0f);
@@ -299,7 +299,7 @@ void Desenha() {
 	espec_grama[0] = 0.1;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	glBindTexture(GL_TEXTURE_2D, texturas[VERDE]);
+	glBindTexture(GL_TEXTURE_2D, texturas[GRAMA]);
 	espec_grama[3] = 0.7;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
