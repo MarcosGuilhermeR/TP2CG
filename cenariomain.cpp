@@ -7,23 +7,32 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-
+ 
 #define MAX_TEX 23    //numero de texturas que serao usadas no vetor de texturas
 
 #define CEU 0
 #define GRAMA 1
+<<<<<<< HEAD
 #define AREIA 2
 #define GUARDASOL 3
 #define PLACA 4
 #define PAQUITO1 5
 #define PAQUITO2 6
+=======
+>>>>>>> origin/master
 
 
+float angulo = 0.0f, rota_paquito = 0.0, controle = 1.0, controle2 = 1.0;
+float xcamera = 0.0f, ycamera = 5.0f, zcamera = 30.0f;     //posicao da camera
+float dxcamera = 0.0f, dycamera = 0.0f, dzcamera = -1.0f;  //direção ao deslocar a camera
 
+<<<<<<< HEAD
 float angulo = 0.0f, rota_paquito = 0, controle = 1, controle2 = 1;
 float xcamera = 0.0f, ycamera = 5.0f, zcamera = 30.0f;     //posicao da camera
 float dxcamera = 0.0f, dycamera = 0.0f, dzcamera = -1.0f;  //direção ao deslocar a camera
 
+=======
+>>>>>>> origin/master
 float quant = 0.4f, cmenu = 0;  //quant é o valor das coordenas rgb da luz difusa da camera
 
 GLuint texturas[MAX_TEX]; //vetor de texturas
@@ -31,8 +40,8 @@ GLuint texturas[MAX_TEX]; //vetor de texturas
 
 //função que configura a direção da camera
 void OrientaCamera(float ang) {
-	dxcamera = sin(ang);
-	dzcamera = -cos(ang);
+	dxcamera = (float) sin(ang);
+	dzcamera = (float) -cos(ang);
 	glLoadIdentity();
 	gluLookAt(xcamera, ycamera, zcamera, xcamera + dxcamera, ycamera + dycamera, zcamera + dzcamera, 0.0f, 1.0f, 0.0f);
 }
@@ -41,22 +50,22 @@ void OrientaCamera(float ang) {
 void MoveCamera(int direcao) {
 	if (xcamera>90.0f) {
 		if (direcao*(dxcamera)*0.7 < 0)
-			xcamera = xcamera + direcao*(dxcamera)*0.7;
+			xcamera =  xcamera + direcao*(dxcamera)*(float)0.7;
 	}
 	if (xcamera<-90.0f) {
 		if (direcao*(dxcamera)*0.7 > 0)
-			xcamera = xcamera + direcao*(dxcamera)*0.7;
+			xcamera = xcamera + direcao*(dxcamera)*(float)0.7;
 	}
 	if (xcamera>-90.0f && xcamera<90.0f)
-		xcamera = xcamera + direcao*(dxcamera)*0.7;
+		xcamera =  xcamera + direcao*(dxcamera)*(float)0.7;
 
 	if (zcamera>90.0f) {
 		if (direcao*(dzcamera)*0.7 < 0)
-			zcamera = zcamera + direcao*(dzcamera)*0.7;
+			zcamera =  zcamera + direcao*(dzcamera)*(float)0.7;
 	}
 	if (zcamera<-90.0f) {
 		if (direcao*(dzcamera)*0.7 > 0)
-			zcamera = zcamera + direcao*(dzcamera)*0.7;
+			zcamera =  zcamera + direcao*(dzcamera)*(float)0.7;
 	}
 	
 	glLoadIdentity();
@@ -174,7 +183,7 @@ void TeclasEspeciais(int key, int x, int y) {
 //função que configura o redimensionamento de janela
 void AlteraTamanho(int largura, int altura) {
 	if (altura == 0) altura = 1;
-	int taxa = 1.0f * largura / altura;
+	float taxa = 1.0f * largura / altura;
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glViewport(0, 0, largura, altura);
@@ -234,12 +243,15 @@ void Inicializa() {
 
 	texturas[CEU] = SOIL_load_OGL_texture("textura/ceu.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 	texturas[GRAMA] = SOIL_load_OGL_texture("textura/grama.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+<<<<<<< HEAD
 	texturas[AREIA] = SOIL_load_OGL_texture("textura/areia.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 	texturas[GUARDASOL] = SOIL_load_OGL_texture("textura/guardasol.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 	texturas[PLACA] = SOIL_load_OGL_texture("textura/placa.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 	texturas[PAQUITO1] = SOIL_load_OGL_texture("textura/paquito1.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 	texturas[PAQUITO2] = SOIL_load_OGL_texture("textura/pa_moinho.jpg", SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_TEXTURE_REPEATS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
 
+=======
+>>>>>>> origin/master
 
 }
 
@@ -247,6 +259,7 @@ void Inicializa() {
 void cenarioEsfera() {
 	glBindTexture(GL_TEXTURE_2D, texturas[CEU]);       //esfera modelada atraves de quadrica
 	glPushMatrix();
+<<<<<<< HEAD
 		GLUquadricObj *quad3;
 		quad3 = gluNewQuadric();
 		gluQuadricNormals(quad3, GLU_SMOOTH);
@@ -273,15 +286,22 @@ void paquito() {
 		glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 2.0f, 0.0f);
 		glEnd();
 		
+=======
+	GLUquadricObj *quad3;
+	quad3 = gluNewQuadric();
+	gluQuadricNormals(quad3, GLU_SMOOTH);
+	gluQuadricTexture(quad3, GL_TRUE);
+	glTranslatef(0.0f, 1.0f, 0.0f);
+	gluSphere(quad3, 900.0, 20, 20);
+>>>>>>> origin/master
 	glPopMatrix();
 }
 
 //função que configura os materiais dos objetos que serao chamados para serem desenhados
 void Desenha() {
 
-	GLfloat espec_grama[4] = { 0.7, 0.7, 0.7, 1.0 };
+	GLfloat espec_grama[4] = { (float) 0.7,(float) 0.7, (float)0.7, (float)1.0 };
 	GLint especMaterial = 100;
-	
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -295,54 +315,57 @@ void Desenha() {
 	glTexCoord2f(80.0f, 80.0f); glVertex3f(400.0f, 0.0f, 400.0f);
 	glTexCoord2f(80.0f, 0.0f); glVertex3f(-400.0f, 0.0f, 400.0f);
 	glEnd();
-	espec_grama[0] = 1.0;
+	espec_grama[0] = (float) 1.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[1] = 1.0;
+	espec_grama[1] = (float) 1.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
 	cenarioEsfera();
+<<<<<<< HEAD
 	moinho();
 	paquito();
 	espec_grama[2] = 1.0;
+=======
+	espec_grama[2] = (float) 1.0;
+>>>>>>> origin/master
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[0] = 0.0;
-	espec_grama[2] = 0.0;
+	espec_grama[0] = (float) 0.0;
+	espec_grama[2] = (float) 0.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[1] = 0.5;
+	espec_grama[1] = (float) 0.5;
 	glMaterialfv(GL_FRONT, GL_AMBIENT, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[0] = 1.0;
+	espec_grama[0] = (float) 1.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[0] = 0.5;
-	espec_grama[1] = 0.5;
-	espec_grama[2] = 0.5;
+	espec_grama[0] = (float) 0.5;
+	espec_grama[1] = (float) 0.5;
+	espec_grama[2] = (float) 0.5;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[0] = 0.0;
+	espec_grama[0] = (float) 0.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[2] = 1.0;
+	espec_grama[2] = (float) 1.0;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[1] = 0.3;
-	espec_grama[2] = 0.2;
+	espec_grama[1] = (float) 0.3;
+	espec_grama[2] = (float) 0.2;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
-	espec_grama[0] = 0.1;
+	espec_grama[0] = (float) 0.1;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
 	glBindTexture(GL_TEXTURE_2D, texturas[GRAMA]);
-	espec_grama[3] = 0.7;
+	espec_grama[3] =  (float) 0.7;
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, espec_grama);
 	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
 	glutSwapBuffers();
-	
 }
 
 //função principal do programa
